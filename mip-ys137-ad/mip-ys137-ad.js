@@ -7,7 +7,7 @@
  * @description: 管理页面上的广告展现
  */
 define(function(require) {
-	var $ = require('zepto');
+	
     var customElem = require('customElement').create();
 	var baidu_domain="dm50.ys137.com";
 	
@@ -24,38 +24,37 @@ define(function(require) {
 		var element = opt.element;
 		if(tu!=""){
 			//有设置tu的，优先展现
-			element.html(getbaidu_ad(tu));
+			element.innerHTML=getbaidu_ad(tu);
 
 		}else{
 			switch(+ad_id){
 				case 1://分页后（四图）
-					element.html(getbaidu_ad("nbdqx58bef"));
+					element.innerHTML=getbaidu_ad("nbdqx58bef");
 					break;
 				case 2://分页后（搜索推荐）
-					element.html(getbaidu_ad("u4djpnkdfe"));
+					element.innerHTML=getbaidu_ad("u4djpnkdfe");
 					break;
 				case 3://头部
-					element.html("");//预留
+					element.innerHTML="";//预留
 					break;
 				default:
-					element.html("");
+					element.innerHTML="";
 					break;
 			}
 		}
 	};
 	//获取插件参数
 	var getOpt = function (element) {
-        var $element = $(element);
         // 获取元素绑定的属性
-        var ad_id = $element.attr('id');
-		var lazy = $element.attr('lazy');
-		var tu = $element.attr('tu');
+        var ad_id = element.getAttribute('id');
+		var lazy = element.getAttribute('lazy');
+		var tu = element.getAttribute('tu');
         // 广告初始化参数
         var opt = {
             id: ad_id,
 			lazy: lazy,
 			tu:tu,
-            element: $element
+            element: element
         };
         return opt;
     };
